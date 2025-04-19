@@ -1,0 +1,25 @@
+3rd Week Notes:
+
+0.1. Edit the scripts so they fit your interfaces, MAC adresses etc... also I renamed my compiled versions of hotapd 'hostapd-dpp' and of wpa_supplicant 'wpa_supplicant-dpp'. 
+
+1. Script CrPrKey.sh on each role
+
+On Enrolle:
+2. Start Script Enrollee, if something fails -> ip link set interface down/up, pkill wpa_supplicant (check if station mode)
+3. Copy URI and transfer to configurator system
+
+On AP:
+4. Start/Edit Script AccesPoint, if something fails -> Interface down/up, check if __ap mode for if. pkill hostapd (make sure to memorize the right SSID)
+5. Copy URI and transfer to configurator system
+
+On Configurator:
+(Don't forget to run the PrivateKey script for Configurator)
+6. Start Configurator Script, if something fails -> check wpa_supplicant Error routine as above (station mode)
+7. Follow the script
+8. When AP Script is done, Connection was successful
+
+See config screenshots for configs that work for hostapd and wpa_supplicant
+
+When you retry the process, you have to change the SSID since there won't be a handshake because the STA remembers the network.
+
+link for info: https://android.googlesource.com/platform/external/wpa_supplicant_8/%2B/refs/tags/android-platform-11.0.0_r3/wpa_supplicant/README-DPP
