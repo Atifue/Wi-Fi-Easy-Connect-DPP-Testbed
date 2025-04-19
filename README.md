@@ -13,17 +13,17 @@ Wi-Fi Easy Connect, also known as **DPP (Device Provisioning Protocol)**, is a s
 
 ## Important: Read Before You Start
 
-Spec:
+Spec:  
 https://www.wi-fi.org/system/files/Wi-Fi_Easy_Connect_Specification_v3.0.pdf
 
-Source of used commands, what to look for at compiling wpa_supplicant and hostapd manually:
+Source of used commands, what to look for at compiling wpa_supplicant and hostapd manually:  
 https://android.googlesource.com/platform/external/wpa_supplicant_8/%2B/refs/tags/android-platform-11.0.0_r3/wpa_supplicant/README-DPP
 
 ---
 
 ## Before Setup
-You must compile wpa_supplicant and hostapd manually as per the linked guide
-Check that your Wi-Fi interfaces support the following modes:
+You must compile wpa_supplicant and hostapd manually as per the linked guide  
+Check that your Wi-Fi interfaces support the following modes:  
 - P2P
 - Managed
 - AP
@@ -31,7 +31,7 @@ Check that your Wi-Fi interfaces support the following modes:
 ---
 
 ## Tested Hardware
-Intel NUCs (2017)
+Intel NUCs (2017)  
 ALFA AWUS036AXML Wi-Fi adapters
 
 ---
