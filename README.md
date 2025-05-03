@@ -31,11 +31,12 @@ Check that your Wi-Fi interfaces support the following modes:
 ---
 
 ## Tested Hardware
-Intel NUCs (2017)  
+Intel NUCs (2019)  
 ALFA AWUS036AXML Wi-Fi adapters
 
 ---
 
 ## Upcoming
-- Integration with OpenWRT
+- Integration with OpenWRT (June-July)
 - Scripts for Raspberry Pis to automate testbed deployment
+- Usability Study of the testbed

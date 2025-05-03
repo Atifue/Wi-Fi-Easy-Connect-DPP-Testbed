@@ -1,0 +1,9 @@
+Scenario3 Describes the case, That there are 2 Devices involved:
+Acces Point that is also the Configurator (NUC1), STA (Raspy)
+
+Once: CrPrKey for Configurator and AP
+Edit file "StartAccesPoint" -> correct ssid
+Start "StartAccesPoint.sh"
+
+config files -> /etc/dpp/*.conf
+(Except dnsmasq.conf, that one goes into /etc)

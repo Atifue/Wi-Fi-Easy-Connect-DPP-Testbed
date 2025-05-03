@@ -25,9 +25,17 @@ KEY_HEX=$(< "$KEY_FILE")
 # === Starting hostapd-dpp with debug in log ===
 echo -e "Starting hostapd-dpp...\n"
 sudo pkill hostapd 2>/dev/null
+sudo ip link set wlx00c0cab79230 down
+sudo rfkill unblock wifi
+sleep 1
+sudo ip link set wlx00c0cab79230 up
 sudo hostapd-dpp "$CONF_PATH" -dd > /tmp/hostapd_dpp.log 2>&1 &
 
 sleep 2  # wait for uptime
+sudo ip addr add 192.168.50.1/24 dev wlx00c0cab79230
+sleep 1
+sudo systemctl restart dnsmasq
+sleep 1
 
 # === Creating Bootstrap with key ===
 echo -e "Generating Bootstrap Uri\n"
@@ -85,12 +93,12 @@ done
 sudo hostapd_cli-dpp -i "$INTERFACE" update_beacon
 
 # === Wait for STA to complete 4-way handshake ===
-echo -e "\nWaiting for STA to complete 4-Way Handshake...\n"
+#echo -e "\nWaiting for STA to complete 4-Way Handshake...\n"
 
-sudo tail -n 0 -f /tmp/hostapd_dpp.log | while read -r line; do
-  if [[ "$line" == *"EAPOL-4WAY-HS-COMPLETED"* ]]; then
-    echo -e "\n4-Way Handshake completed. STA successfully joined the network.\n"
-    break
-  fi
-done
+#sudo tail -n 0 -f /tmp/hostapd_dpp.log | while read -r line; do
+#  if [[ "$line" == *"EAPOL-4WAY-HS-COMPLETED"* ]]; then
+#    echo -e "\n4-Way Handshake completed. STA successfully joined the network.\n"
+#    break
+#  fi
+#done
 
