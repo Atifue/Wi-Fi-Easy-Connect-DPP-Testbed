@@ -1,0 +1,11 @@
+Error explanation:
+
+
+The implementation of hostapd has issues with off-channel communication after the first device being connected.
+The picture "Hostapd as configurator first auth init.png" shows how the log of hostapd should look like after a successful dpp_auth_init
+The picture "Hostapd as Configurator Error.png" shows how the second call of dpp_auth_init results in hostapd crashing and shutting down the ap.
+
+Therefore we will use a second interface as a configurator.
+
+
+

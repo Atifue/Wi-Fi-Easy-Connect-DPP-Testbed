@@ -1,0 +1,15 @@
+Scenario2 Describes the case, That there are 3 Devices involved:
+Acces Point (NUC1: Interface wlx...), Configurator (NUC1: Interface wlp...), STA (Raspy)
+
+Once: CrPrKey for Configurator and AP
+Edit file "StartAccesPoint" -> correct ssid
+Start "StartAccesPoint.sh"
+Edit file "StartConfiguratorSetup" -> correct ssid, correct AP URI
+Start "StartConfiguratorSetup"
+Edit file "StartConfiguratorSetup" -> correct ssid
+Edit file "Scanner.py" -> correct path of ConfiguratorAddDevice.sh
+Start Scanner.py
+
+
+config files -> /etc/dpp/*.conf
+Except dnsmasq.conf that goes into /etc/

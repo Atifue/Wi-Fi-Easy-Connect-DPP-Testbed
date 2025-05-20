@@ -1,0 +1,26 @@
+Instructions:
+(Raspberry Pi with ALFA Wifi Adapter)
+Get Internet Access
+Copy scripts to Desktop
+Adjust wifi interfaces + mac adresses in scripts
+Copy dpp.conf to /etc/dpp/dpp.conf
+Adjust Paths in Scripts to /home/$YOURUSER/Desktop/$SCRIPT_XY
+
+Do: 
+setup.sh
+CrPrKey.sh
+StartDppEnrollee.sh
+-> Install Packages if I missed some in setup.sh
+-> Copy Bootstrapping Key and print QRCode
+
+Do:
+sudo crontab -e
+add:
+@reboot echo none | sudo tee /sys/class/leds/ACT/trigger #Start Controlling the LED of the Raspi
+@reboot echo 0 | sudo tee /sys/class/leds/ACT/brightness #Turn Off light
+@reboot /home/$YOURUSER/Desktop/StartDppEnrollee.sh #Start DPP Listen
+
+-> setup is complete. Every reboot device is ready for connection
+
+Note: Currently configured for deleting old network information. If not wanted delete refresh.sh in StartDppEnrollee.sh
+Blink.sh is only for controlling the LED and give feedback if EAPOL Handshake worked. Blink.sh is called at the end of StartDPPEnrollee.sh

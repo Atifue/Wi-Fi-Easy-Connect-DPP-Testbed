@@ -1,0 +1,28 @@
+Scenario3 Describes the case, That there are 2 Devices involved:
+Acces Point that is also the Configurator (NUC1), STA (Raspy)
+The Accesspoint also hosts a http server with a script where you can upload the bootstrapping keys, simulating a cloud service.
+
+
+install lighttpd
+copy lighttpd config to /etc/lighttpd/
+copy store.py and confirm_store.py to /var/www/html/cgi-bin/
+
+install dnsmasq
+dnsmasq.conf goes to /etc/
+
+other config files -> /etc/dpp/*.conf
+
+Once: CrPrKey for Configurator and AP
+Edit file "StartAccesPoint" -> correct ssid, mac adress, interface
+Start "StartAccesPoint.sh"
+Edit file "StartConfigurator" -> correct ssid, mac adress, interface
+Start "StartConfigurator.sh"
+
+
+Keys can be added via
+
+http://192.168.50.1/cgi-bin/store.py?key=[key]&key=[key]....
+
+Example URL: http://192.168.50.1/cgi-bin/store.py?key=DPP%3AC%3A81%2F6%3BM%3A00c0cab79282%3BV%3A2%3BK%3AMDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADFrjvJFbcqjOplwbvzQ2ICHGwKc27DsWoaqg0Gk9coIg%3D%3D%3B%3B&key=DPP%3AC%3A81%2F6%3BM%3A00c0cab72edc%3BV%3A2%3BK%3AMDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgACBQQiyasrQAiQ4yoHuQoN5GL%2BRjinOp%2BtZGhzC6b8tZE%3D%3D%3B%3B
+
+Note: Due to the Error an extra Configurator Device is needed. For convenience we chose the same device, but a different wifi chip. Check Scenario 2 if you have seperate devices.
