@@ -9,15 +9,6 @@ print("Content-Type: text/html; charset=utf-8\n")
 storage_dir = "/var/www/html/keys"
 os.makedirs(storage_dir, exist_ok=True)
 
-# === Known device keys (Device A) ===
-known_keys = {
-    "DPP:C:81/6;M:00c0cab79282;V:2;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADFrjvJFbcqjOplwbvzQ2ICHGwKc27DsWoaqg0Gk9coIg=;;",
-    "DPP:C:81/6;M:00c0cab79283;V:2;K:KEY2==;;",
-    "DPP:C:81/6;M:00c0cab79284;V:2;K:KEY3==;;",
-    "DPP:C:81/6;M:00c0cab79285;V:2;K:KEY4==;;",
-    "DPP:C:81/6;M:00c0cab79286;V:2;K:KEY5==;;"
-}
-
 # === Read incoming keys ===
 form = cgi.FieldStorage()
 keys = form.getlist("key")
@@ -32,7 +23,7 @@ print("""
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Bulk Wi-Fi enrollment framework</title>
+  <title>Wi-Fi Connector</title>
   <style>
     html, body {
       margin: 0; padding: 0;
@@ -147,21 +138,20 @@ print("""
 <body>
 
   <div class="page-header">
-    <h1>Bulk Wi-Fi enrollment framework</h1>
+    <h1>Wi-Fi Connector</h1>
   </div>
 
   <!-- Enroll Devices toggle -->
   <button id="openOverlay">Select Devices</button>
   <!-- View enrolled devices button -->
   <button id="viewEnrolled" onclick="location.href='/cgi-bin/confirm_store.py'">
-    View enrolled devices
+    View added devices
   </button>
 
   <div class="overlay" id="deviceOverlay">
     <div class="modal">
       <button class="close-btn" id="closeOverlay">&times;</button>
-      <h2>Please select all devices you want to enroll into the Wi-Fi.<br>
-          Only select devices that are known to you.</h2>
+      <h2>Please select all devices you want to add to the Wi-Fi</h2>
       <form method="POST" action="/cgi-bin/confirm_store.py">
         <div class="cards">
 """)
@@ -169,19 +159,37 @@ print("""
 # Generate device cards
 for key in keys:
     escaped_key = html.escape(key)
-    device_type = "A" if key in known_keys else "B"
-    image_url = "/cgi-bin/device_pictures/DeviceA.jpg" if device_type == "A" else "/cgi-bin/device_pictures/DeviceB.png"
+    # Determine device type and description based on key prefix
+    parts = key.split(':', 2)
+    prefix = key
+    if prefix in ("DPP:C:81/6;M:00c0cab72edc;V:2;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgACBQQiyasrQAiQ4yoHuQoN5GL+RjinOp+tZGhzC6b8tZE==;;"):
+        image_file = "DeviceA.png"
+        description = "Smart Temperature Sensor"
+    elif prefix in ("DPP:C:81/6;M:00c0cab79282;V:2;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADOB+hOAydt8g10wvb6lqp2Rkyh08dPQ3FvPRYowql2HE=;;"):
+        image_file = "DeviceA.png"
+        description = "Smart Temperature Sensor"
+    elif prefix in ("DPP:C:81/6;M:00c0cab72edc;V:2;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgACBQQiyasrQAiQ4yoHuQoN5GL+RjinOp+tZGhzC6b8tZF==;;"):
+        image_file = "DeviceB.png"
+        description = "Smart Humidity Sensor"
+    elif prefix == "DPP:C:81/6;M:00c0cab72edc;V:2;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgACBQQiyasrQAiQ4yoHuQoN5GL+RjinOp+tZGhzC6b8tZA==;;":
+        image_file = "DeviceC.png"
+        description = "Network tracker"
+    else:
+        image_file = "Unknown.png"
+        description = "Unknown Device"
+
+    image_url = f"/cgi-bin/device_pictures/{image_file}"
     print(f"""
-          <label class="card">
-            <img src="{image_url}" alt="Device {device_type}">
-            <p><strong>Device {device_type}</strong></p>
-            <input type="checkbox" name="key" value="{escaped_key}" checked>
+          <label class=\"card\">
+            <img src=\"{image_url}\" alt=\"{description}\"> 
+            <p><strong>{description}</strong></p>
+            <input type=\"checkbox\" name=\"key\" value=\"{escaped_key}\" checked>
           </label>
     """)
 
 print("""
         </div>
-        <button type="submit" class="action-btn">Store selected devices</button>
+        <button type="submit" class="action-btn">Add selected devices</button>
       </form>
     </div>
   </div>

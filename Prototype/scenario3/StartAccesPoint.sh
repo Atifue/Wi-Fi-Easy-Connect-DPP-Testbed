@@ -7,7 +7,7 @@ CONF_PATH="/etc/dpp/hostapd-ap.conf"
 KEY_FILE_AP="/etc/dpp/privatekey.hex"
 KEY_FILE_Conf="/etc/dpp/configuratorkey.hex"
 MAC="00c0cab79230"
-SSID="DPPTestAP42"
+SSID="DPPTestAP50"
 LOG_FILE="/tmp/hostapd_dpp.log"
 CHANNEL="81/6"
 
@@ -114,5 +114,5 @@ fi
 
 # === Debug ===
 #sudo hostapd_cli-dpp -i "$INTERFACE"
-
+sudo /home/irt/Desktop/scenario3/MacParse.sh
 

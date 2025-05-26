@@ -8,7 +8,7 @@ KEY_FILE="/etc/dpp/configuratorkey.hex"
 MAC="982cbc7f0431"
 CHANNEL="81/6"
 LOG_FILE="/tmp/configurator_dpp.log"
-SSID="DPPTestAP42"
+SSID="DPPTestAP50"
 
 
 # === Root-Check ===
@@ -107,7 +107,7 @@ while true; do
             		echo "$PEER_ID:$RAW_MAC" >> "$TEMP_PEERS_FILE"
         	fi
 
-        	sleep 5
+        	sleep 1
     	done < "$UNCONFIGURED_PEERS_FILE"
 
     mv "$TEMP_PEERS_FILE" "$UNCONFIGURED_PEERS_FILE"
