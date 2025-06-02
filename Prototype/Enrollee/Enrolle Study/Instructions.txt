@@ -8,13 +8,6 @@ Adjust Paths in Scripts to /home/$YOURUSER/Desktop/$SCRIPT_XY
 
 Do: 
 setup.sh
-
-go to hostap/wpa_supplicant
-make clean
-make
-cp wpa_supplicant /bin/wpa_supplicant
-cp wpa_cli /bin/wpa_cli
-
 CrPrKey.sh
 StartDppEnrollee.sh
 -> Install Packages if I missed some in setup.sh
@@ -31,6 +24,3 @@ add:
 
 Note: Currently configured for deleting old network information. If not wanted delete refresh.sh in StartDppEnrollee.sh
 Blink.sh is only for controlling the LED and give feedback if EAPOL Handshake worked. Blink.sh is called at the end of StartDPPEnrollee.sh
-
-
-You might need dos2unix now, because i also edit scripts on wifi
