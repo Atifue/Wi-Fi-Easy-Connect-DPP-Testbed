@@ -28,7 +28,7 @@ sleep 1
 sudo ip link set $INTERFACE up
 sleep 2
 
-sudo wpa_supplicant -i "$INTERFACE" -D "$DRIVER" -c "$CONF_PATH" -dd > /tmp/wpa_dpp.log 2>&1 &
+sudo wpa_supplicant -i "$INTERFACE" -D "$DRIVER" -c "$CONF_PATH" -e 'p2p_listen_reg_class=81,p2p_listen_channel=6,p2p_oper_reg_class=81,p2p_oper_channel=6' -dd > /tmp/wpa_dpp.log 2>&1 &
 
 sleep 2  # wait for uptime
 
