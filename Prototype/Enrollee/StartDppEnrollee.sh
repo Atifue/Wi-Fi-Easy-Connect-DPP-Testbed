@@ -8,6 +8,12 @@ KEY_FILE="/etc/dpp/privatekey.hex"
 MAC="2ccf67d23067"
 CHANNEL="81/6"
 
+# === Root-Check ===
+if [[ $EUID -ne 0 ]]; then
+  echo "Please sudo"
+  exit 1
+fi
+
 # === Read ASN.1 DER Key ===
 if [[ ! -f "$KEY_FILE" ]]; then
   echo "Error: Key not found. Create it first with CrPrKey.sh"

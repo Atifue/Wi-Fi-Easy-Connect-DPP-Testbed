@@ -21,7 +21,7 @@ SSID_HEX=$(echo -n $SSID | xxd -p)
 
 # === Read ASN.1 DER Key ===
 if [[ ! -f "$KEY_FILE" ]]; then
-  echo -e "Error: Key not found. Create it first with CrPrKey.sh\n"
+  echo -e "Error: Key not found. Create it first with CreateKeyConfigurator.sh\n"
   exit 1
 fi
 
